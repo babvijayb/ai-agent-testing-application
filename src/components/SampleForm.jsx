@@ -1,40 +1,43 @@
 import React, { useState } from 'react';
 
 const SampleForm = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '' });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Name:4544', name);
-        console.log('Email:', email);
-        setName('');
-        setEmail('');
-    }
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="name">Name: </label>
-                <input 
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="email">Email: </label>
-                <input 
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    );
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Name:', formData.name);
+    console.log('Email:', formData.email);
+    setFormData({ name: '', email: '' }); // reset
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name: </label>
+        <input 
+          type="text"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email: </label>
+        <input 
+          type="email"
+          id="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
 export default SampleForm;
