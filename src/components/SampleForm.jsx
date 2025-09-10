@@ -1,47 +1,40 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-const SampleForm = ({ labelText, placeholderText, onSubmit }) => {
-  const inputRef = useRef(null);
+const SampleForm = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-
-    if (!onSubmit) {
-      console.error("onSubmit prop is missing for SampleForm.");
-      return; // Or display an error message to the user
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Name:4544', name);
+        console.log('Email:', email);
+        setName('');
+        setEmail('');
     }
 
-    const inputValue = inputRef.current.value;
-
-    if (!inputValue) {
-      alert("Please enter a value."); // Example of basic client-side validation
-      return;
-    }
-
-    onSubmit(inputValue);
-  };
-
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="nameInput">{labelText}</label>
-      <input
-        type="text"
-        id="nameInput"
-        ref={inputRef}
-        placeholder={placeholderText}
-        required // Example of HTML5 validation
-      />
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
-
-SampleForm.propTypes = {
-  labelText: PropTypes.string.isRequired,
-  placeholderText: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="name">Name: </label>
+                <input 
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="email">Email: </label>
+                <input 
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
 
 export default SampleForm;
