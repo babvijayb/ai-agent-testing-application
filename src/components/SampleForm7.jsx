@@ -37,4 +37,4 @@ const SampleForm7 = () => {
     );
 }
 
-export default SampleForm7;
+export default SampleForm7  ;
