@@ -6,7 +6,7 @@ const SampleForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Name:4544', name);
+        console.log('Nadsfasdme:4544', name);
         console.log('Email:', email);
         setName('');
         setEmail('');
